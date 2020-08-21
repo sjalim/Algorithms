@@ -53,7 +53,6 @@ int main()
         cin >> a >> b >> w;
         G[a][b] = w;
         G[b][a] = w;
-
     }
 
     int s;
