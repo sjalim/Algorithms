@@ -6,7 +6,7 @@ void topSort(int v)
     vector<int> T;
     int visited[v];
     int in_dergee[v];
-    queue<int> que;
+    priority_queue<int, vector<int>, greater<int>> que;
     memset(visited, 0, sizeof(visited));
     memset(in_dergee, 0, sizeof(in_dergee));
     for (int i = 0; i < v; i++)
@@ -29,7 +29,7 @@ void topSort(int v)
 
     while (!que.empty())
     {
-        int p = que.front();
+        int p = que.top();
         que.pop();
         T.push_back(p);
         for (int j = 0; j < v; j++)
@@ -38,9 +38,11 @@ void topSort(int v)
             if (!visited[j] && adjMat[p][j])
             {
                 in_dergee[j]--;
-
-                que.push(j);
-                visited[j] = 1;
+                if (!in_dergee[j])
+                {
+                    que.push(j);
+                    visited[j] = 1;
+                }
             }
         }
     }
